@@ -23,7 +23,10 @@ public LocalDate getPurchaseDate() {
 }
 
 public boolean isPaid() { 
-    return paid;
+    if(paid==true)
+        return true;
+    else
+        return false;
 }
 
 public void setPaid(boolean paid) { 
@@ -39,11 +42,11 @@ public CustomerProduct(String customerSSN, String productID, LocalDate purchaseD
 }
 
 public String lineRepresentation() {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("day-month-year");
       return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid;
 }
 public String getSearchKey() {
-     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("day-month-year");
      return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
 
 }
