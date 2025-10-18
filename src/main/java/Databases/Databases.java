@@ -1,5 +1,7 @@
 package Databases;
 import Records.RecordsInterface;
+
+
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -59,10 +61,24 @@ public abstract class Databases  {
     }
 
 
+    public RecordsInterface getRecord(String key){
+        for ( RecordsInterface i : records){
+            if(i.getSearchKey().equals(key))
+                return i;
+        }
+        return null;
+    }
+
+    public Boolean contains(String key){
+        for (RecordsInterface i : records){
+            if(i.getSearchKey().equals(key))
+                return true;
+        }
+        return false;
+    }
 
 
-
-        public ArrayList<RecordsInterface> returnAllRecords(){
+    public ArrayList<RecordsInterface> returnAllRecords(){
                 return records;
         }
 
