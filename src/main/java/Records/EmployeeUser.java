@@ -1,7 +1,5 @@
 
-package persons;
-
-import Databases.RecordsInterface;
+package Records;
 
 public class EmployeeUser implements RecordsInterface {
     @Override

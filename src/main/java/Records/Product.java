@@ -1,7 +1,5 @@
 
-package products;
-
-import Databases.RecordsInterface;
+package Records;
 
 public class Product implements RecordsInterface {
     @Override

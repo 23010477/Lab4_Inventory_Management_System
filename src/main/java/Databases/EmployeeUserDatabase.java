@@ -1,6 +1,7 @@
 package Databases;
 
-import persons.EmployeeUser;
+import Records.RecordsInterface;
+import Records.EmployeeUser;
 
 public class EmployeeUserDatabase extends Databases{
 

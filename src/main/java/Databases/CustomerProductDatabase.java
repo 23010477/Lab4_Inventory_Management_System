@@ -1,5 +1,7 @@
 package Databases;
 
+import Records.RecordsInterface;
+
 public class CustomerProductDatabase extends  Databases {
 
     public CustomerProductDatabase(String fileName) {

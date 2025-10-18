@@ -1,6 +1,7 @@
 package Databases;
 
-import products.Product;
+import Records.RecordsInterface;
+import Records.Product;
 
 public class ProductDatabase extends Databases {
     public ProductDatabase(String fileName) {
