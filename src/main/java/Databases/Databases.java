@@ -24,14 +24,53 @@ public abstract class Databases  {
 
             while ((line = file.readLine()) != null) {
 
-                if (records != null){
+                RecordsInterface record  = createRecordFrom(line);
+                records.add(record);
 
                 }
 
 
-            }
+            } catch (IOException e) {
+
+            System.out.println("Error reading file" + e);
+
+
+              }
 
         }
+
+    public void saveToFile(){
+        try(FileWriter file = new FileWriter(fileName);
+        PrintWriter printIntoFile = new PrintWriter(file) ){
+            for(RecordsInterface i : records){
+              printIntoFile.println(i.lineRepresentation());
+            }
+        }catch (IOException e) {System.out.println("Error Writing into File"+e);}
+    }
+
+
+    public void deleteRecord(String key){
+        for (int i = 0 ; i < records.size(); i++){
+            if (records.get(i).getSearchKey().equals(key)){
+                records.remove(i);
+                break;
+            }
+        }
+    }
+
+
+
+
+
+        public ArrayList<RecordsInterface> returnAllRecords(){
+                return records;
+        }
+
+        public void insertRecord(RecordsInterface record){
+        records.add(record);
+        }
+
+
 
     }
 
@@ -42,10 +81,3 @@ public abstract class Databases  {
 
 
 
-
-
-
-
-
-
-}
