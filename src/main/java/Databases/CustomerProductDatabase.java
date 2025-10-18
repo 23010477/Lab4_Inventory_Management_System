@@ -1,6 +1,9 @@
 package Databases;
 
+import Records.CustomerProduct;
 import Records.RecordsInterface;
+
+import java.time.LocalDate;
 
 public class CustomerProductDatabase extends  Databases {
 
@@ -13,10 +16,9 @@ public class CustomerProductDatabase extends  Databases {
         String[] token = line.split(",");
         String customerSSN = token[0];
         String productID = token[1];
-        String manufacturerName = token[2];
-        Boolean purchased = Boolean.parseBoolean(token[3]);
+        LocalDate purchaseDate = LocalDate.parse(token[2]);
 
-        return null;
+        return new CustomerProduct(customerSSN,productID,purchaseDate);
     }
 
 }
