@@ -8,14 +8,14 @@ public class EmployeeUser implements RecordsInterface {
     private String email;
     private String address;
     private String phoneNumber;
-    
-        public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber){
-            this.employeeId = employeeId;
-            this.name = name;
-            this.email = email;
-            this.address = address;
-            this.phoneNumber = phoneNumber;
-        }
+
+    public EmployeeUser(String employeeId, String name, String email, String address, String phoneNumber) {
+        this.employeeId = employeeId;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getEmployeeId() {
         return employeeId;
@@ -56,11 +56,11 @@ public class EmployeeUser implements RecordsInterface {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-        
-    
+
     @Override
-    public String lineRepresentation(){
-        String lineRep = this.employeeId + "," + this.name + "," + this.email + "," + this.address + "," + this.phoneNumber;
+    public String lineRepresentation() {
+        String lineRep = this.employeeId + "," + this.name + "," + this.email + "," + this.address + ","
+                + this.phoneNumber;
         return lineRep;
     }
 
@@ -69,5 +69,4 @@ public class EmployeeUser implements RecordsInterface {
         return this.employeeId;
     }
 
-    
 }
