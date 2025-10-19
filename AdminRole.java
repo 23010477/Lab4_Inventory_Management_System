@@ -3,6 +3,9 @@ package Roles;
 import Databases.EmployeeUserDatabase;
 import Records.EmployeeUser;
 import Records.RecordsInterface;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -21,10 +24,21 @@ public class AdminRole {
      public AdminRole() {
         database = new EmployeeUserDatabase("Employees.txt");
     }
-     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
-        EmployeeUser newEmployee = new EmployeeUser(employeeId, name, email, address, phoneNumber);
-        database.addEmployee(newEmployee);
+    public void addEmployee(EmployeeUser employee) {
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter("Employees.txt", true))) {
+        writer.write(
+            employee.getEmployeeId() + "," +
+            employee.getName() + "," +
+            employee.getEmail() + "," +
+            employee.getAddress() + "," +
+            employee.getPhoneNumber()
+        );
+        writer.newLine(); 
+        System.out.println("Employee added successfully!");
+    } catch (IOException e) {
+        System.out.println("Error writing to file: " + e.getMessage());
     }
+}
      
     public EmployeeUser[] getListOfEmployees() {
         ArrayList<RecordsInterface> records = database.returnAllRecords();
