@@ -19,6 +19,8 @@ public class Main {
         for (EmployeeUser emp : employees) {
             System.out.println("ID: " + emp.getEmployeeId() + ", Name: " + emp.getName() + ", Email: " + emp.getEmail() + ", Address: " + emp.getAddress() + ", Phone: " + emp.getPhoneNumber());
         }
+        admin.logout();
+
         System.out.println("#######################################################################");
         EmployeeRole employee = new EmployeeRole();
         employee.addProduct("P001", "Dell G15", "Dell", "USA", 1000, 30000.0F);
@@ -30,6 +32,8 @@ public class Main {
             System.out.println("ID: " + prod.getProductID() + ", Name: " + prod.getProductName() + ", Manufacturer: " + prod.getManufacturerName() + ", Supplier: " + prod.getSupplierName() + ", Quantity: " + prod.getQuantity() + ", Price: " + prod.getPrice());
         }
         employee.purchaseProduct("123456789", "P001", java.time.LocalDate.now());
+        employee.logout();
+
         System.out.println("*****************************************************:");
         System.out.println("List of Purchasing Operations:");
         CustomerProduct[] operations = employee.getListOfPurchasingOperations();
@@ -37,4 +41,6 @@ public class Main {
             System.out.println("Customer SSN: " + op.getCustomerSSN() + ", Product ID: " + op.getProductID() + ", Purchase Date: " + op.getPurchaseDate());
         }
     }
+
+
 }

@@ -21,12 +21,16 @@ public class EmployeeRole {
         customerProductDatabase.readFromFile();
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName,
-            String supplierName, int quantity, float price) {
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
+
+        if(ProductsDatabase.contains(productID)){
+            System.out.println("ID already exists, Operation Rejected.");
+            return;
+        }
 
         Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
         ProductsDatabase.insertRecord(newProduct);
-        ProductsDatabase.saveToFile();
+        System.out.println("success");
     }
 
     public Product[] getListOfProducts() {
@@ -73,8 +77,7 @@ public class EmployeeRole {
         CustomerProduct newPurchase = new CustomerProduct(customerSSN, productID, purchaseDate);
         customerProductDatabase.insertRecord(newPurchase);
 
-        ProductsDatabase.saveToFile();
-        customerProductDatabase.saveToFile();
+
 
         return true;
     }
@@ -118,7 +121,7 @@ public class EmployeeRole {
 
         target.setQuantity(target.getQuantity() + 1);
         customerProductDatabase.deleteRecord(customerSSN + "," + productID + "," + purchaseDate.toString());
-        ProductsDatabase.saveToFile();
+
 
         return target.getPrice();
     }
@@ -133,7 +136,7 @@ public class EmployeeRole {
                 if (!purchase.isPaid()) {
                     purchase.setPaid(true);
 
-                    customerProductDatabase.saveToFile();
+
 
                     System.out.println("Payment applied successfully for customer " + customerSSN);
                     return true;
