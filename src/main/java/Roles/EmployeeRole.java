@@ -17,6 +17,8 @@ public class EmployeeRole {
         ProductsDatabase = new ProductDatabase("Products.txt");
         customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
 
+        ProductsDatabase.readFromFile();
+        customerProductDatabase.readFromFile();
     }
 
     public void addProduct(String productID, String productName, String manufacturerName,
@@ -46,16 +48,7 @@ public class EmployeeRole {
         return ops;
     }
 
-    /*
-     * private int findProductIndex(String productID) {
-     * RecordsInterface[] recs = ProductsDatabase.returnAllRecords();
-     * for (int i = 0; i < recs.length; i++) {
-     * Product p = (Product) recs[i];
-     * if (p.getProductID().equals(productID)) return i;
-     * }
-     * return -1;
-     * }
-     */
+
 
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
 

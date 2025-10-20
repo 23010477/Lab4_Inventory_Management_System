@@ -13,21 +13,19 @@ public class AdminRole {
 
     public AdminRole() {
         database = new EmployeeUserDatabase("Employees.txt");
+        database.readFromFile();
     }
 
-    public void addEmployee(EmployeeUser employee) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Employees.txt", true))) {
-            writer.write(
-                    employee.getEmployeeId() + "," +
-                            employee.getName() + "," +
-                            employee.getEmail() + "," +
-                            employee.getAddress() + "," +
-                            employee.getPhoneNumber());
-            writer.newLine();
-            System.out.println("Employee added successfully!");
-        } catch (IOException e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+    public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
+        if(database.contains(employeeId)){
+            System.out.println("ID already exists, Operation Rejected.");
+            return;
         }
+
+        EmployeeUser employee = new EmployeeUser(employeeId, name, email, address, phoneNumber);
+
+        database.insertRecord(employee);
+        System.out.println("success");
     }
 
     public EmployeeUser[] getListOfEmployees() {

@@ -21,8 +21,8 @@ public class Main {
         }
         System.out.println("#######################################################################");
         EmployeeRole employee = new EmployeeRole();
-        employee.addProduct("P001", "Dell G15", "Dell", "USA", 1000, 30000.0);
-        employee.addProduct("P002", "HP notebook", "HP", "USA", 800, 25000.0);
+        employee.addProduct("P001", "Dell G15", "Dell", "USA", 1000, 30000.0F);
+        employee.addProduct("P002", "HP notebook", "HP", "USA", 800, 25000.0F);
         Product[] products = employee.getListOfProducts();
         System.out.println("*****************************************************:");
         System.out.println("List of Products:");
