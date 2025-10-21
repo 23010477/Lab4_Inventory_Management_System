@@ -16,21 +16,19 @@ public class EmployeeRole {
     public EmployeeRole() {
         ProductsDatabase = new ProductDatabase("Products.txt");
         customerProductDatabase = new CustomerProductDatabase("CustomersProducts.txt");
-
         ProductsDatabase.readFromFile();
         customerProductDatabase.readFromFile();
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
-
-        if(ProductsDatabase.contains(productID)){
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName,
+            int quantity, float price) {
+        if (ProductsDatabase.contains(productID)) {
             System.out.println("ID already exists, Operation Rejected.");
             return;
         }
-
         Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
         ProductsDatabase.insertRecord(newProduct);
-        System.out.println("success");
+        System.out.println("product inserted successfully in database");
     }
 
     public Product[] getListOfProducts() {
@@ -43,7 +41,6 @@ public class EmployeeRole {
     }
 
     public CustomerProduct[] getListOfPurchasingOperations() {
-
         ArrayList<RecordsInterface> recs = customerProductDatabase.returnAllRecords();
         CustomerProduct[] ops = new CustomerProduct[recs.size()];
         for (int i = 0; i < recs.size(); i++) {
@@ -52,42 +49,31 @@ public class EmployeeRole {
         return ops;
     }
 
-
-
     public boolean purchaseProduct(String customerSSN, String productID, LocalDate purchaseDate) {
-
         Product[] products = getListOfProducts();
         Product target = null;
-
         for (Product p : products) {
             if (p.getProductID().equals(productID)) {
                 target = p;
                 break;
             }
         }
-
         if (target == null || target.getQuantity() == 0) {
+            System.out.println("Product not found or out of stock");
             return false;
-        }
-
-        else {
+        } else {
             target.setQuantity(target.getQuantity() - 1);
         }
-
         CustomerProduct newPurchase = new CustomerProduct(customerSSN, productID, purchaseDate);
         customerProductDatabase.insertRecord(newPurchase);
-
-
-
+        System.out.println("Product Purchased Successfully");
         return true;
     }
 
     public double returnProduct(String customerSSN, String productID, LocalDate purchaseDate, LocalDate returnDate) {
-
         if (returnDate.isBefore(purchaseDate)) {
             return -1;
         }
-
         Product[] products = getListOfProducts();
         Product target = null;
         for (Product p : products) {
@@ -99,7 +85,6 @@ public class EmployeeRole {
         if (target == null) {
             return -1;
         }
-
         CustomerProduct[] purchases = getListOfPurchasingOperations();
         CustomerProduct foundPurchase = null;
         for (CustomerProduct cp : purchases) {
@@ -113,31 +98,22 @@ public class EmployeeRole {
         if (foundPurchase == null) {
             return -1;
         }
-
         long daysBetween = ChronoUnit.DAYS.between(purchaseDate, returnDate);
         if (daysBetween > 14) {
             return -1;
         }
-
         target.setQuantity(target.getQuantity() + 1);
         customerProductDatabase.deleteRecord(customerSSN + "," + productID + "," + purchaseDate.toString());
-
-
         return target.getPrice();
     }
 
     public boolean applyPayment(String customerSSN, LocalDate purchaseDate) {
         CustomerProduct[] purchases = getListOfPurchasingOperations();
-
         for (CustomerProduct purchase : purchases) {
             if (purchase.getCustomerSSN().equals(customerSSN)
                     && purchase.getPurchaseDate().equals(purchaseDate)) {
-
                 if (!purchase.isPaid()) {
                     purchase.setPaid(true);
-
-
-
                     System.out.println("Payment applied successfully for customer " + customerSSN);
                     return true;
                 } else {
@@ -146,14 +122,13 @@ public class EmployeeRole {
                 }
             }
         }
-
         System.out.println("No purchase found for customer " + customerSSN + " on " + purchaseDate);
         return false;
     }
-
     public void logout() {
         ProductsDatabase.saveToFile();
         customerProductDatabase.saveToFile();
+        System.out.println("**** Data Saved Successfully and logged out! ****");
     }
 
 }
