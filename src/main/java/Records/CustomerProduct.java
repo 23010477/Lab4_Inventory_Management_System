@@ -1,53 +1,52 @@
 package Records;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class CustomerProduct implements RecordsInterface {
 
-private String customerSSN,productID;
-private LocalDate purchaseDate;
-private boolean paid;
+    private String customerSSN, productID;
+    private LocalDate purchaseDate;
+    private boolean paid;
 
-public String getCustomerSSN() { 
-    return customerSSN;
-}
+    public String getCustomerSSN() {
+        return customerSSN;
+    }
 
+    public String getProductID() {
+        return productID;
+    }
 
-public String getProductID() { 
-    return productID;
-}
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
 
-public LocalDate getPurchaseDate() { 
-    return purchaseDate;
-}
+    public boolean isPaid() {
+        return paid;
+    }
 
-public boolean isPaid() { 
-   return paid;
-}
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
 
-public void setPaid(boolean paid) { 
-    this.paid = paid;
-}
+    public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate) {
+        this.customerSSN = customerSSN;
+        this.productID = productID;
+        this.purchaseDate = purchaseDate;
+        this.paid = false;
+    }
 
+    @Override
+    public String lineRepresentation() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid;
+    }
 
-public CustomerProduct(String customerSSN, String productID, LocalDate purchaseDate) {
-    this.customerSSN=customerSSN;
-    this.productID=productID;
-    this.purchaseDate=purchaseDate;
-    this.paid=false;
-}
-@Override
-public String lineRepresentation() {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-      return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid;
-}
-@Override
-public String getSearchKey() {
-     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-     return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
+    @Override
+    public String getSearchKey() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return customerSSN + "," + productID + "," + purchaseDate.format(formatter);
 
-}
+    }
 
 }

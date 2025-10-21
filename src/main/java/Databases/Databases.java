@@ -45,6 +45,7 @@ public abstract class Databases {
             for (RecordsInterface i : records) {
                 printIntoFile.println(i.lineRepresentation());
             }
+            System.out.println("Saved Successfully!");
         } catch (IOException e) {
             System.out.println("Error Writing into File" + e);
         }
@@ -54,6 +55,7 @@ public abstract class Databases {
         for (int i = 0; i < records.size(); i++) {
             if (records.get(i).getSearchKey().equals(key)) {
                 records.remove(i);
+                System.out.println("Record deleted Successfully!");
                 break;
             }
         }
@@ -81,6 +83,7 @@ public abstract class Databases {
 
     public void insertRecord(RecordsInterface record) {
         records.add(record);
+        System.out.println("Record Inserted Successfully!");
     }
 
 }

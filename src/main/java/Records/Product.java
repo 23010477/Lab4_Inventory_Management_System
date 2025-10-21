@@ -48,6 +48,7 @@ public class Product implements RecordsInterface {
     }
 
     public void setProductID(String productID) {
+        
         this.productID = productID;
     }
 
