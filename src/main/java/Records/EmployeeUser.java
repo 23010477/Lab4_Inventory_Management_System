@@ -1,6 +1,5 @@
 
 package Records;
-
 public class EmployeeUser implements RecordsInterface {
 
     private String employeeId;

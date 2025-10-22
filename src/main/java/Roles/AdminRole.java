@@ -17,7 +17,7 @@ public class AdminRole {
     }
 
     public void addEmployee(String employeeId, String name, String email, String address, String phoneNumber) {
-        if(database.contains(employeeId)){
+        if (database.contains(employeeId)) {
             System.out.println("ID already exists, Operation Rejected.");
             return;
         }
@@ -25,7 +25,7 @@ public class AdminRole {
         EmployeeUser employee = new EmployeeUser(employeeId, name, email, address, phoneNumber);
 
         database.insertRecord(employee);
-        System.out.println("success");
+        System.out.println("Employee inserted successfully in database");
     }
 
     public EmployeeUser[] getListOfEmployees() {
@@ -39,11 +39,12 @@ public class AdminRole {
 
     public void removeEmployee(String key) {
         database.deleteRecord(key);
+                System.out.println("Employee removed successfully");
     }
 
     public void logout() {
         database.saveToFile();
-        System.out.println("All unsaved data has been written to Employees.txt");
+        System.out.println("**** Data Saved Successfully and logged out! ****");
     }
 
 }
