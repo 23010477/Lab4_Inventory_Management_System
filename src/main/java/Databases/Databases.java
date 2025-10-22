@@ -41,7 +41,7 @@ public abstract class Databases {
 
     public void saveToFile() {
         try (FileWriter file = new FileWriter(fileName);
-                PrintWriter printIntoFile = new PrintWriter(file)) {
+             PrintWriter printIntoFile = new PrintWriter(file)) {
             for (RecordsInterface i : records) {
                 printIntoFile.println(i.lineRepresentation());
             }

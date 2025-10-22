@@ -41,6 +41,7 @@ public CustomerProduct(String customerSSN, String productID, LocalDate purchaseD
 @Override
 public String lineRepresentation() {
       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
       return customerSSN + "," + productID + "," + purchaseDate.format(formatter) + "," + paid;
 }
 @Override

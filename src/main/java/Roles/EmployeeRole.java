@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class EmployeeRole {
     private ProductDatabase ProductsDatabase;
     private CustomerProductDatabase customerProductDatabase;
+    private final float DEFAULT_PRICE = 0;
 
     public EmployeeRole() {
         ProductsDatabase = new ProductDatabase("Products.txt");
@@ -21,13 +22,13 @@ public class EmployeeRole {
         customerProductDatabase.readFromFile();
     }
 
-    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity, float price) {
+    public void addProduct(String productID, String productName, String manufacturerName, String supplierName, int quantity) {
 
         if(ProductsDatabase.contains(productID)){
             System.out.println("ID already exists, Operation Rejected.");
             return;
         }
-
+        float price =  DEFAULT_PRICE;
         Product newProduct = new Product(productID, productName, manufacturerName, supplierName, quantity, price);
         ProductsDatabase.insertRecord(newProduct);
         System.out.println("success");
